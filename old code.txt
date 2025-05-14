@@ -1,0 +1,354 @@
+When touch/swipe the slide it should go to next slide 
+"use client";
+
+import { useEffect, useState, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+
+const slides = [
+  {
+    title: "Protect Your Home With SAS Roofing.",
+    description:
+      "SAS Roofing is your source for high-quality roofing of any type.",
+    buttonText: "Read More",
+    image: "/slider1.jpg",
+  },
+  {
+    title: "Quality Roofing Solutions for Every Home.",
+    description:
+      "We provide expert roofing installations, repairs, and inspections.",
+    buttonText: "Read More",
+    image: "/slider-2.jpg",
+  },
+  {
+    title: "Your Roofing Needs For A Great Repair Job.",
+    description: "Reliable, professional, and affordable roofing services.",
+    buttonText: "Read More",
+    image: "/slider-3.jpg",
+  },
+];
+
+export default function HeroSection() {
+  const [current, setCurrent] = useState(0);
+  const [clickedButton, setClickedButton] = useState<"prev" | "next" | null>(
+    null
+  );
+
+  const nextSlide = useCallback(
+    () => setCurrent((prev) => (prev + 1) % slides.length),
+    []
+  );
+
+  const prevSlide = () =>
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+
+  useEffect(() => {
+    const interval = setInterval(() => nextSlide(), 6000);
+    return () => clearInterval(interval);
+  }, [nextSlide]);
+
+  const slide = slides[current];
+
+  return (
+    <section
+      id="hero-section"
+      className="relative w-full min-h-[530px] lg:min-h-[700px] overflow-hidden"
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={slide.image}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            fill
+            priority
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30" />
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="relative z-10 h-full flex flex-col justify-center items-start px-6 md:px-20 text-white">
+        <motion.div
+          key={slide.title}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -40 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-3xl space-y-6 pt-10"
+        >
+          <h1 className="text-5xl md:text-6xl lg:text-[80px] xl:text-[90px] 2xl:text-[100px] font-extrabold leading-tight">
+            {slide.title}
+          </h1>
+          <p className="text-lg md:text-xl font-light tracking-wide">
+            {slide.description}
+          </p>
+          <Link href="/about">
+            <div className="inline-block border-4 border-[#003269] p-1">
+              <Button className="Hero_hover-button text-sm sm:text-base lg:text-lg">
+                {slide.buttonText.toUpperCase()}
+              </Button>
+            </div>
+          </Link>
+        </motion.div>
+      </div>
+
+      {/* Controls */}
+      <button
+        onClick={() => {
+          setClickedButton("prev");
+          prevSlide();
+          setTimeout(() => setClickedButton(null), 200);
+        }}
+        aria-label="Previous Slide"
+        className={`hidden md:block absolute left-5 top-1/2 -translate-y-1/2 rounded-full p-2 z-20 transition-all duration-200 transform
+    ${clickedButton === "prev" ? "bg-[#e63a27]" : "bg-black/40"}
+    hover:bg-[#e63a27] active:scale-95`}
+      >
+        <ArrowLeft className="text-white" />
+      </button>
+
+      <button
+        onClick={() => {
+          setClickedButton("next");
+          nextSlide();
+          setTimeout(() => setClickedButton(null), 200);
+        }}
+        aria-label="Next Slide"
+        className={`hidden md:block absolute right-5 top-1/2 -translate-y-1/2 rounded-full p-2 z-20 transition-all duration-200 transform
+    ${clickedButton === "next" ? "bg-[#e63a27]" : "bg-black/40"}
+    hover:bg-[#e63a27] active:scale-95`}
+      >
+        <ArrowRight className="text-white" />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        {slides.map((_, i) => (
+          <div
+            key={i}
+            className={`h-2 w-2 rounded-full ${
+              i === current ? "bg-[#e63a27]" : "bg-white/70"
+            }`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
+
+
+
+
+
+add same to this 
+"use client";
+
+import React, { useState } from "react";
+import Image from "next/image";
+import { FaCertificate, FaLightbulb, FaHome } from "react-icons/fa";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+export default function AboutCompany() {
+  const [showMore, setShowMore] = useState(false);
+
+  const features = [
+    { icon: <FaCertificate className="text-[#e63a27]" />, label: "Certified" },
+    {
+      icon: <FaLightbulb className="text-yellow-400" />,
+      label: "Innovative Work",
+    },
+    { icon: <FaHome className="text-[#e63a27]" />, label: "Experienced" },
+  ];
+
+  return (
+    <section className="flex flex-col xl:flex-row px-6 sm:p-8 xl:px-16 2xl:px-32 bg-white gap-10 w-5/6 mx-auto lg:pt-20">
+      {/* Image Block */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="relative w-full sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px] xl:max-w-[480px] border-2 border-[#e63a27] rounded-md overflow-hidden flex-shrink-0 xl:self-start aspect-[5/6] xl:aspect-[7/8]"
+      >
+        <Image
+          src="/aboutimg.jpg"
+          alt="Roof house illustration"
+          fill
+          className="object-fill"
+        />
+
+        <div className="absolute top-4 left-4 bg-white bg-opacity-90 px-4 py-3 rounded-md text-[#003269] shadow-md flex items-center gap-2">
+          <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#003269]">
+            15
+          </span>
+          <div className="leading-tight text-left text-sm sm:text-base font-bold uppercase tracking-wide">
+            <div>Years</div>
+            <div>of Experience</div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Text Content */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+        viewport={{ once: true }}
+        className="w-full max-w-5xl mx-auto xl:mx-0 flex flex-col justify-between"
+      >
+        <div>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-6 h-[1px] bg-[#e63a27]" />
+            <h4 className="text-sm sm:text-base uppercase text-[#e63a27] font-semibold tracking-wider">
+              About Company
+            </h4>
+          </div>
+
+          <h1 className="text-4xl lg:text-5xl font-bold text-[#003269] leading-tight mb-4">
+            Roofing Is Our Heritage & Quality Is Our Tradition
+          </h1>
+
+          <div className="flex flex-wrap items-center gap-4 text-sm font-semibold text-[#003269] mb-6">
+            {features.map(({ icon, label }) => (
+              <div
+                key={label}
+                className="flex items-center gap-1 uppercase font-bold"
+              >
+                {icon}
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-gray-600 text-base lg:text-lg mb-4">
+            For over twelve years, SAS Roofing & Waterproofing has proudly
+            served Brooklyn, Manhattan, and Queens with top-tier roofing,
+            waterproofing, and masonry solutions. Every roof we install, every
+            leak we seal, and every brick we lay reflects our unwavering
+            commitment to quality and craftsmanship.
+          </p>
+
+          {showMore && (
+            <div className="text-gray-600 text-base lg:text-lg space-y-4 mb-4">
+              <p>
+                As a trusted roofing contractor in Brooklyn, we specialize in
+                everything from residential roof repairs to complete commercial
+                roof installations. Our expert team also delivers professional
+                waterproofing services to protect buildings and extend
+                structural integrity.
+              </p>
+              <p>
+                Our skilled masonry team handles everything from brick
+                restoration to sidewalk repair with care.
+              </p>
+              <p>
+                Choose SAS Roofing & Waterproofing—where dedication meets
+                experience, and every project is built on a foundation of trust
+                and excellence.
+              </p>
+            </div>
+          )}
+
+          <button
+            onClick={() => setShowMore((prev) => !prev)}
+            className="text-[#e63a27] font-semibold text-sm underline mb-6"
+          >
+            {showMore ? "Read Less" : "Read More"}
+          </button>
+        </div>
+
+        {/* Read More Link */}
+        <Link
+          href="/about"
+          className="inline-block border-4 border-[#003269] p-2 self-start group"
+        >
+          <span className="block border-2 border-[#e63a27] text-[#e63a27] px-6 py-3 font-bold uppercase tracking-wide text-sm lg:text-base transition group-hover:bg-[#e63a27] group-hover:text-white hover-button">
+            Read More
+          </span>
+        </Link>
+      </motion.div>
+    </section>
+  );
+}
+
+Add this image in bg in repeat and bg-color f5f5f5 and add shadow and add some magrin so that it should look a different component 
+
+"use client";
+
+import ServicesSlider from "@/components/ServicesSlider";
+import { useRef } from "react";
+import type { Swiper as SwiperType } from "swiper";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+export default function OurServicesPage() {
+  const swiperRef = useRef<SwiperType | null>(null);
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
+  return (
+    <main className="px-4 sm:px-6 lg:px-12 pt-5">
+      <div className="mx-auto py-8 space-y-12 ">
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUp}
+          className="flex flex-col md:flex-row justify-evenly items-center text-center md:text-left gap-4"
+        >
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-6 h-px bg-[#e63a27]" />
+              <span className="text-xs sm:text-sm lg:text-lg font-bold text-[#e63a27] uppercase">
+                Our Services
+              </span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold text-[#003269] leading-snug">
+              SAS Roofing & Waterproofing
+            </h1>
+          </div>
+
+          <Link
+            href="/services"
+            className="group border-4 border-[#003269] p-2 inline-block"
+          >
+            <div className="border border-[#e63a27] px-5 py-3 text-xs sm:text-sm md:text-base lg:text-lg font-bold text-[#e63a27] uppercase whitespace-nowrap hover-button">
+              All Services
+            </div>
+          </Link>
+        </motion.section>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUp}
+          className=""
+        >
+          <ServicesSlider swiperRef={swiperRef} />
+        </motion.div>
+      </div>
+    </main>
+  );
+}
+

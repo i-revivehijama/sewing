@@ -1,0 +1,19 @@
+<!-- First SVG Icon -->
+<svg width="44" height="46" viewBox="0 0 44 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="42" height="44" stroke="red" stroke-width="2"/>
+  <rect x="1" y="1" width="42" height="6" fill="red"/>
+  <g fill="none" stroke="red" stroke-width="2">
+    <circle cx="5.5" cy="13.5" r="4"/>
+    <circle cx="16.5" cy="13.5" r="4"/>
+    <circle cx="27.5" cy="13.5" r="4"/>
+    <circle cx="38.5" cy="13.5" r="4"/>
+    <circle cx="5.5" cy="23.5" r="4"/>
+    <circle cx="16.5" cy="23.5" r="4"/>
+    <circle cx="27.5" cy="23.5" r="4"/>
+    <circle cx="38.5" cy="23.5" r="4"/>
+    <circle cx="5.5" cy="33.5" r="4"/>
+    <circle cx="16.5" cy="33.5" r="4"/>
+    <circle cx="27.5" cy="33.5" r="4"/>
+    <circle cx="38.5" cy="33.5" r="4"/>
+  </g>
+</svg>
