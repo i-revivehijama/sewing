@@ -51,55 +51,52 @@ const VideoSection = ({ margin }: Props) => {
             <div className="w-full h-full bg-[url('/thm-pattern-5.png')] bg-repeat" />
           </div>
 
-          <div className="flex justify-center items-center">
-            <motion.div
-              className="relative z-30 text-white p-10 md:p-16 lg:max-w-[80%] xl:max-w-[60%]"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-6 h-px bg-white" />
-                <h5 className="text-sm uppercase font-semibold">Video Proof</h5>
-              </div>
+         <div className="flex justify-center items-center">
+  <motion.div
+    className="relative z-30 text-white p-10 md:p-16 lg:max-w-[80%] xl:max-w-[60%]"
+    variants={fadeUp}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, amount: 0.2 }}
+  >
+    <div className="flex items-center gap-3 mb-2">
+      <div className="w-6 h-px bg-white" />
+      <h5 className="text-sm uppercase font-semibold">Video Proof</h5>
+    </div>
 
-              <h2 className="text-3xl lg:text-5xl font-medium leading-tight mb-4 font-inter">
-                Have a Look <br /> At Our Video
-              </h2>
+    <h2 className="text-3xl lg:text-5xl font-medium leading-tight mb-4 font-inter">
+      Have a Look <br /> At Our Machines in Action
+    </h2>
 
-              <ul className="space-y-2">
-                <li>
-                  <SiTicktick className="inline mr-2 font-bevietnam" /> Roof of
-                  the Year
-                </li>
-                <li>
-                  <SiTicktick className="inline mr-2 font-bevietnam" /> Fully
-                  supported metal
-                </li>
-                <li>
-                  <SiTicktick className="inline mr-2 font-bevietnam" /> Reliable
-                  & Trustworthy
-                </li>
-                <li>
-                  <SiTicktick className="inline mr-2 font-bevietnam" />{" "}
-                  Dependable
-                </li>
-              </ul>
+    <ul className="space-y-2">
+      <li>
+        <SiTicktick className="inline mr-2 font-bevietnam" /> Best-in-Class Stitching Performance
+      </li>
+      <li>
+        <SiTicktick className="inline mr-2 font-bevietnam" /> Industrial & Domestic Models Available
+      </li>
+      <li>
+        <SiTicktick className="inline mr-2 font-bevietnam" /> Trusted by Tailors Across the City
+      </li>
+      <li>
+        <SiTicktick className="inline mr-2 font-bevietnam" /> Affordable Repairs & Services
+      </li>
+    </ul>
 
-              {/* Mobile Video Icon */}
-              <div className="mt-4 ml-6 pr-6 pl-6 flex flex-col md:hidden">
-                <GoVideo
-                  size={60}
-                  className="text-white text-4xl sm:text-6xl cursor-pointer"
-                  onClick={() => setIsOpen(false)}
-                />
-              </div>
-              <div className="text-white md:hidden font-inter text-sm">
-                FLAT ROOF INSTALLATION
-              </div>
-            </motion.div>
-          </div>
+    {/* Mobile Video Icon */}
+    <div className="mt-4 ml-6 pr-6 pl-6 flex flex-col md:hidden">
+      <GoVideo
+        size={60}
+        className="text-white text-4xl sm:text-6xl cursor-pointer"
+        onClick={() => setIsOpen(true)}
+      />
+    </div>
+    <div className="text-white md:hidden font-inter text-sm">
+      SEWING MACHINE DEMO
+    </div>
+  </motion.div>
+</div>
+
         </div>
 
         {/* Right Section with Video Icon */}
