@@ -61,29 +61,7 @@ export default function ServiceAndFaqSection() {
             className="p-3 border border-gray-300 bg-white rounded-md focus:ring-2 focus:ring-[#e63a27] focus:outline-none"
           />
 
-          <select
-            id="service"
-            name="service"
-            defaultValue=""
-            required
-            className="appearance-none p-3 rounded-md font-semibold text-white bg-[#003269] border border-gray-300"
-          >
-            <option value="" disabled className="text-white py-3 bg-[#003269]">
-              Service You Need
-            </option>
-            <option value="single-ply" className="text-white py-3 bg-[#e63a27]">
-              Roofing
-            </option>
-            <option value="modified" className="text-white py-3 bg-[#e63a27]">
-              Waterproofing
-            </option>
-            <option value="built-up" className="text-white py-3 bg-[#e63a27]">
-              Masnory
-            </option>
-            <option value="built-up" className="text-white bg-[#e63a27]">
-              General contractors
-            </option>
-          </select>
+          
           <textarea
             id="message"
             placeholder="Your Requirements..."
